@@ -2,9 +2,9 @@
 #include <conio.h>
 #include <time.h>
 
-#define NN      16
-#define N       4
-#define stdsum  34
+#define NN      9
+#define N       3
+#define stdsum  15
 typedef struct square {
     int     i[NN];
     int     totalCount, resultCount, partResultCount;
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
                                     {
                                         if ( Used(i,8) )
                                             continue;
-										for(i[9] = 1; i[9] <= NN; i[9]++)
+										/*for(i[9] = 1; i[9] <= NN; i[9]++)
 										{
 											if ( Used(i,9) )
 												continue;
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 																for(i[15] = 1; i[15] <= NN; i[15]++)
 																{
 																	if ( Used(i,15) )
-																		continue;
+																		continue;*/
 
 																	s.totalCount++;
 
@@ -97,13 +97,13 @@ int main(int argc, char *argv[])
 																		s.resultCount++;
 																		print( s );
 																	}
-																}
+																/*}
 															}
 														}
 													}
 												}
 											}
-										}
+										}*/
                                     }
                                 }
                             }
@@ -168,11 +168,11 @@ int     exam( SQUARE *ps )
     {
         for (k = 0; k < N; k++)
         {
-            csum[k] += ps->i[j*N+k];     //M[j][k];
-            rsum[j] += ps->i[j*N+k];     //M[j][k];
+            csum[k] += ps->i[j*N+k];     
+            rsum[j] += ps->i[j*N+k];     
         }
-        sum1 += ps->i[j*N+j];           //M[j][j];
-        sum2 += ps->i[j*N+N-1-j];         //M[j][2 - j];
+        sum1 += ps->i[j*N+j];           
+        sum2 += ps->i[j*N+N-1-j];         
     }
 
     
