@@ -44,8 +44,13 @@ int main(int argc, char *argv[])
 {
     SQUARE s;
 
-    printf("input a number(3-5)and interval:");
+    printf("input a number(3-5) and  the value of interval:(ÖĞ¼äÇëÓÃ¶ººÅ¸ô¿ª):");
     scanf("%d,%d", &N, &interval);
+    while(interval < 1)
+	{
+		printf("please input a number(3-5) and value of interval again(ÖĞ¼äÇëÓÃ¶ººÅ¸ô¿ª):");
+		scanf("%d,%d", &N, &interval);
+	}
     
     NN = N*N;
 
@@ -94,14 +99,14 @@ void    initSquare( SQUARE  *ps)
     ps->threshold_max[N-1] = 0;
     temp = NN;
     for(i=1;i<N;i++) {
-        ps->threshold_max[N-1-i] = temp+ps->threshold_max[N-1-i+1];
+        ps->threshold_max[N-1-i] = temp+ps->threshold_max[N-1-i+1];//ÇóÃ¿ĞĞ/ÁĞ×ÜºÍµÄ×î´óÖµ
         temp--;
     }
 
     ps->threshold_min[N-1] = 0;
     temp = 1;
     for(i=1;i<N;i++) {
-        ps->threshold_min[N-1-i] = temp+ps->threshold_min[N-1-i+1];
+        ps->threshold_min[N-1-i] = temp+ps->threshold_min[N-1-i+1];//ÇóÃ¿ĞĞ/ÁĞ×ÜºÍµÄ×îĞ¡Öµ
         temp++;
     }
         
@@ -259,28 +264,28 @@ void print(SQUARE s, int direct)
 			if((j+1)%N==0)
 				printf("\n");
 		}
-        printf("totalCount:(%d)\t\ttime:(%ld)ms\r\n\n\n", s.totalCount ,clock() - s.t_start);
+        printf("totalCount:(%d)\tpartResultCount:(%d)\ttime:(%.2f)s\r\n\n\n", s.totalCount ,s.partResultCount,(float)(clock() - s.t_start)/1000);
     }
 }
 
-// æ£€æŸ¥æ•°ç»„iå„å…ƒç´ æ˜¯å¦æ»¡è¶³ä¹å®«æ ¼è¦æ±‚ï¼Œå¦‚æœæ»¡è¶³è¿”å›é0ã€‚
+// ¼ì²éÊı×éi¸÷ÔªËØÊÇ·ñÂú×ã¾Å¹¬¸ñÒªÇó£¬Èç¹ûÂú×ã·µ»Ø·Ç0¡£
 int exam(SQUARE *ps)
 {
     int j;
     int sum1, sum2;
     
-    // åˆå§‹åŒ–å„æ±‚å’Œå˜é‡ï¼Œå‡†å¤‡æ±‚å’Œæ£€æŸ¥
+    // ³õÊ¼»¯¸÷ÇóºÍ±äÁ¿£¬×¼±¸ÇóºÍ¼ì²é
     sum1 = 0;
     sum2 = 0;
 
-    // æŒ‰è¡Œ/åˆ—ã€å¯¹è§’çº¿æ±‚å’Œ
+    // °´ĞĞ/ÁĞ¡¢¶Ô½ÇÏßÇóºÍ
     for (j = 0; j < N; j++)
     {
         sum1 += ps->i[j * N + j];     //M[j][j];
         sum2 += ps->i[j * N + N - 1 - j]; //M[j][2 - j];
     }
 
-    // æ£€æŸ¥å¯¹è§’çº¿æ˜¯å¦ç›¸ç­‰
+    // ¼ì²é¶Ô½ÇÏßÊÇ·ñÏàµÈ
     if (sum1 != ps->stdsum || ps->stdsum != sum2)
         return 0;
     else
